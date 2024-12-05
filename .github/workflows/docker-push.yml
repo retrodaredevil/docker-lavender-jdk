@@ -21,16 +21,15 @@ jobs:
         data:
           - base_image: docker.io/library/ubuntu:22.04
             package_name: openjdk-21-jre
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 21-ubuntu-jammy
           - base_image: docker.io/library/ubuntu:22.04
             package_name: openjdk-17-jre
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 17-ubuntu-jammy
       fail-fast: false
-    env:
-      #      platforms: ${{ github.ref == 'refs/heads/dev' && 'linux/amd64' || 'linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x' }}
-      platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
     steps:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout repository
@@ -74,6 +73,6 @@ jobs:
             BASE_IMAGE=${{ matrix.data.base_image }}
             PACKAGE_NAME=${{ matrix.data.package_name }}
           push: true
-          platforms: ${{ env.platforms }}
+          platforms: ${{ matrix.data.platforms }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

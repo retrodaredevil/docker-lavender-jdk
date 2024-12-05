@@ -1,11 +1,9 @@
-ARG BASE_IMAGE="ubuntu:jammy"
+ARG BASE_IMAGE
 FROM $BASE_IMAGE
-ARG PACKAGE_NAME="openjdk-21-jre"
+ARG PACKAGE_NAME
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    "${PACKAGE_NAME}" \
-    ca-certificates && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "${PACKAGE_NAME}" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

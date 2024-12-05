@@ -13,6 +13,7 @@ docker run --rm ghcr.io/retrodaredevil/lavender-jre:21-ubuntu-jammy java --versi
 
 We should have variants for the following:
 * Java Version
+  * 17
   * 21
 * Base Image
   * Ubuntu https://wiki.ubuntu.com/DevelopmentCodeNames
