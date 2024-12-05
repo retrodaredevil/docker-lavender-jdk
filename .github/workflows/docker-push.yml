@@ -49,9 +49,10 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}
-
-          # NOTE: We do not use the tags attribute because we pass our tags directly to the next action
-
+          # Docs on GitHub Actions expressions: https://docs.github.com/en/actions/learn-github-actions/expressions
+          tags: |
+            ${{ join(matrix.data.tag_names, '
+            type=raw,value=') }}
           # https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys
           labels: |
             maintainer=retrodaredevil
@@ -74,5 +75,5 @@ jobs:
             PACKAGE_NAME=${{ matrix.data.package_name }}
           push: true
           platforms: ${{ env.platforms }}
-          tags: ${{ join(matrix.data.tag_names, ',') }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

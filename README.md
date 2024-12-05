@@ -2,6 +2,13 @@
 
 A Docker container supporting the latest Java versions for arm/v7 and other architectures.
 
+``ghcr.io/retrodaredevil/lavender-jre``
+
+```shell
+docker pull ghcr.io/retrodaredevil/lavender-jre:21-ubuntu-jammy
+docker run --rm ghcr.io/retrodaredevil/lavender-jre:21-ubuntu-jammy java --version
+```
+
 ## Variants
 
 We should have variants for the following:
