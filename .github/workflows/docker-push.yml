@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - main
-      - dev
+  schedule:
+    # 10:37 UTC - 05:37 EST (06:37 EDT) (04:37 CST) (5:37 CDT) every Tuesday
+    - cron: 37 10 * * 2
 
 env:
   REGISTRY: ghcr.io
@@ -12,23 +14,59 @@ env:
 
 jobs:
   build-push:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
     strategy:
       matrix:
         data:
-          - base_image: docker.io/library/ubuntu:22.04
+          # Ubuntu Noble (24.04)
+          - base_image: docker.io/library/ubuntu:noble
+            package_name: openjdk-21-jre
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+            tag_names:
+              - 21-ubuntu-noble
+          - base_image: docker.io/library/ubuntu:noble
+            package_name: openjdk-17-jre
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
+            tag_names:
+              - 17-ubuntu-noble
+
+          # Ubuntu Jammy (22.04)
+          - base_image: docker.io/library/ubuntu:jammy
             package_name: openjdk-21-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 21-ubuntu-jammy
-          - base_image: docker.io/library/ubuntu:22.04
+          - base_image: docker.io/library/ubuntu:jammy
             package_name: openjdk-17-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 17-ubuntu-jammy
+
+          # Debian Bookworm (12)
+          - base_image: docker.io/library/debian:bookworm
+            package_name: openjdk-17-jre
+            platforms: linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/386,linux/mips64le,linux/ppc64le,linux/s390x
+            tag_names:
+              - 17-debian-bookworm
+          - base_image: docker.io/library/debian:bookworm-slim
+            package_name: openjdk-17-jre
+            platforms: linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/386,linux/mips64le,linux/ppc64le,linux/s390x
+            tag_names:
+              - 17-debian-bookworm-slim
+          # Debian Bullseye (11)
+          - base_image: docker.io/library/debian:bullseye
+            package_name: openjdk-17-jre
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
+            tag_names:
+              - 17-debian-bullseye
+          - base_image: docker.io/library/debian:bullseye-slim
+            package_name: openjdk-17-jre
+            platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
+            tag_names:
+              - 17-debian-bullseye-slim
       fail-fast: false
     steps:
       # https://github.com/marketplace/actions/checkout
