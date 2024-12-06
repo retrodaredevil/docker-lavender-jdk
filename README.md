@@ -51,6 +51,14 @@ We should have variants for the following:
       * Slim
       * Regular
 
+## Exceptions
+
+I've found that these specific architectures could not be supported:
+
+* linux/mips64le
+  * This affects `debian:bookworm*` base images, as Debian Bookworm is the only base Docker image that supports `linux/mips64le`
+  * I plan to test this architecture on new base images but if the build fails for `linux/mips64le` on a new base image, I will not support `linux/mips64le`.
+
 ## Why Make This?
 
 There are countless other Docker images containing JREs, but many of them don't have arm/v7 support, 

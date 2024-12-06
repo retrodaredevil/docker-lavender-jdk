@@ -22,47 +22,47 @@ jobs:
       matrix:
         data:
           # Ubuntu Noble (24.04)
-          - base_image: docker.io/library/ubuntu:noble
+          - base_image: ubuntu:noble
             package_name: openjdk-21-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 21-ubuntu-noble
-          - base_image: docker.io/library/ubuntu:noble
+          - base_image: ubuntu:noble
             package_name: openjdk-17-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 17-ubuntu-noble
 
           # Ubuntu Jammy (22.04)
-          - base_image: docker.io/library/ubuntu:jammy
+          - base_image: ubuntu:jammy
             package_name: openjdk-21-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 21-ubuntu-jammy
-          - base_image: docker.io/library/ubuntu:jammy
+          - base_image: ubuntu:jammy
             package_name: openjdk-17-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/riscv64,linux/s390x
             tag_names:
               - 17-ubuntu-jammy
 
           # Debian Bookworm (12)
-          - base_image: docker.io/library/debian:bookworm
+          - base_image: debian:bookworm
             package_name: openjdk-17-jre
-            platforms: linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/386,linux/mips64le,linux/ppc64le,linux/s390x
+            platforms: linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/386,linux/ppc64le,linux/s390x
             tag_names:
               - 17-debian-bookworm
-          - base_image: docker.io/library/debian:bookworm-slim
+          - base_image: debian:bookworm-slim
             package_name: openjdk-17-jre
-            platforms: linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/386,linux/mips64le,linux/ppc64le,linux/s390x
+            platforms: linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/386,linux/ppc64le,linux/s390x
             tag_names:
               - 17-debian-bookworm-slim
           # Debian Bullseye (11)
-          - base_image: docker.io/library/debian:bullseye
+          - base_image: debian:bullseye
             package_name: openjdk-17-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
             tag_names:
               - 17-debian-bullseye
-          - base_image: docker.io/library/debian:bullseye-slim
+          - base_image: debian:bullseye-slim
             package_name: openjdk-17-jre
             platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/386
             tag_names:
